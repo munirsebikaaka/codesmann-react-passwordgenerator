@@ -2,34 +2,41 @@ import { useState } from "react";
 
 const lowerCase = "abcefghijklmnopqrstuvwxyz";
 const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXWZ";
+const numbers = "0123456789";
+let allCase = "";
 
 function App() {
-  let [smallLetters, setSmallLetters] = useState("");
-  function genSmall() {
-    smallLetters += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-    console.log(smallLetters);
+  const [isAdded, setIsAdded] = useState(false);
+  const [capitals, setCapital] = useState(false);
+  const [num, setNum] = useState(false);
+  if (isAdded) {
+    allCase += lowerCase[Math.floor(Math.random() * lowerCase.length)];
   }
-  function genBig() {
-    smallLetters += upperCase[Math.floor(Math.random() * upperCase.length)];
-    console.log(smallLetters);
+  if (capitals) {
+    allCase += upperCase[Math.floor(Math.random() * upperCase.length)];
+  }
+  if (num) {
+    allCase += numbers[Math.floor(Math.random() * numbers.length)];
+  }
+
+  function toggleSmall() {
+    setIsAdded(true);
+  }
+
+  function toggleCapital() {
+    setCapital(true);
+  }
+  function toggleNum() {
+    setNum(true);
   }
   return (
     <div>
-      <SmallCase
-        onGenSmall={genSmall}
-        onSmallLetter={smallLetters}
-        onGenBig={genBig}
-      />
+      <h1>{allCase}</h1>
+      <button onClick={toggleSmall}>a-z</button>
+      <button onClick={toggleCapital}>A-Z</button>
+      <button onClick={toggleNum}>0-1</button>
     </div>
   );
 }
-function SmallCase({ onGenSmall, onSmallLetter, onGenBig }) {
-  return (
-    <div>
-      <h1>{onSmallLetter}</h1>
-      <button onClick={onGenSmall}>ab</button>
-      <button onClick={onGenBig}>AB</button>
-    </div>
-  );
-}
+
 export default App;
