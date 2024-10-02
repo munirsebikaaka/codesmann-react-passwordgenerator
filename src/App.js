@@ -49,28 +49,21 @@ function App() {
   function generateFinalPassword() {
     setSelectedAllNeeded(true);
   }
-  function copyPasswordAndSetInitialStatesOfUsedStates() {
-    password.select();
-    document.execCommand("copy");
+  function setInitialStatesOfUsedStates() {
+    setIsAdded(false);
+    setCapital(false);
+    setIsSymbol(false);
+    setNum(false);
+    setSelectedAllNeeded(false);
     setAllCase("");
+    setPassword("");
     setPassword("");
   }
   return (
     <div className="app">
       <h1>password generator</h1>
       <div className="inputs">
-        <p>
-          {selectedAllNeeded && (
-            <input
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          )}
-        </p>
-        <button onClick={copyPasswordAndSetInitialStatesOfUsedStates}>
-          Copy
-        </button>
+        <p>{selectedAllNeeded ? password : "Press  the buttons bellow."}</p>
       </div>
       <div className="control-btn">
         <div>
@@ -90,7 +83,14 @@ function App() {
           </button>
         </div>
       </div>
-      <button onClick={generateFinalPassword}>generator</button>
+      <div className="ac-btn">
+        <button className="gen" onClick={generateFinalPassword}>
+          Generate
+        </button>
+        <button className="res" onClick={setInitialStatesOfUsedStates}>
+          Restart
+        </button>
+      </div>
     </div>
   );
 }
